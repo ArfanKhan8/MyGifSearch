@@ -28,6 +28,9 @@ function fetchGifs(query) {
 
   fetch(url)
       .then((response) => {
+        if (response.status === 429) {
+          throw new Error("Too many requests. Please try again later.");
+        }
           if (!response.ok) {
               throw new Error(`HTTP error! Status: ${response.status}`);
           }
@@ -50,10 +53,13 @@ function fetchGifs(query) {
 
 function displayGifs(gifs) {
   const gifContainer = document.getElementById("gifContainer");
+  
 
   gifs.forEach((gif) => {
       const img = document.createElement("img");
       img.src = gif.images.fixed_height.url;
+      img.alt = gif.title;
+      img.style.cursor = "pointer"; 
       gifContainer.appendChild(img);
   });
 }
@@ -72,7 +78,7 @@ function displayTrendingGifs() {
           }
           displayGifs(data.data);
           offset += limit; 
-          document.getElementById("loadMoreButton").style.display = "block"; 
+          document.getElementById("loadMoreButton").style.display = "block";  
       })
       .catch((error) => console.error("Error fetching trending GIFs:", error));
 }

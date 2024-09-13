@@ -39,12 +39,28 @@ button:hover {
   background-color: #0056b3;
 }
 
+
 #gifContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 10px; 
   margin-top: 20px;
+}
+
+
+#gifContainer img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  transition: transform 0.3s ease; 
+  cursor: pointer; 
+}
+
+
+#gifContainer img:hover {
+  transform: scale(1.1); 
 }
 
 img {
